@@ -28,8 +28,8 @@ class DBUrls(db):
         self._cur.execute("UPDATE stocks SET base_url='%s' WHERE symbol='%s';" % (url, symbol))
         self._conn.commit()
 
-    def get_stock_list(self):
-        self._cur.execute("SELECT * from stocks where base_url='' limit 20;")
+    def get_stock_list(self, limit=5):
+        self._cur.execute("SELECT * from stocks where base_url<>'' limit %d;" % limit)
         rows = self._cur.fetchall()
         if rows:
             return rows
