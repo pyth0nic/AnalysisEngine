@@ -34,6 +34,22 @@ class DBUrls(db):
         if rows:
             return rows
 
+    def get_stock_list_today(self, limit=5):
+        self._cur.execute("select * \
+        FROM public.stocks left join public.stock_related_urls on \
+        public.stock_related_urls.symbol= public.stocks.symbol \
+        where (public.stock_related_urls.last_date::timestamp::date < now()::date - 1) or \
+        public.stock_related_urls.last_date is null limit %d;" % limit)
+        rows = self._cur.fetchall()
+        if rows:
+            return rows
+
+    def insert_stock_urls(self, symbol, rows):
+        for row in rows:
+            self._cur.execute("INSERT INTO stock_related_urls (symbol, url, referer) VALUES ('%s','%s', '%s)"
+                              % (symbol, row["url"], row["referer"]))
+        self._conn.commit()
+
 #if __name__=="__main__":
     #print("start")
     #db = DBUrls()
