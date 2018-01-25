@@ -1,4 +1,5 @@
-from JobWorkers import CompanySupervisor
+from JobWorkers.CompanySupervisor import CompanySupervisor
 
 if __name__ == "__main__":
-    print("g")
+    supervisor = CompanySupervisor()
+    supervisor.run_batch()
