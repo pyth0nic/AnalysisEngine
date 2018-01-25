@@ -8,7 +8,7 @@ class CompanySupervisor:
 
     def run_batch(self):
         db = DBUrls()
-        data = db.get_stock_list_today(limit=10)
+        data = db.get_stock_list_today(limit=5)
         if not data:
             return
 
@@ -22,10 +22,10 @@ class CompanySupervisor:
             plist.append(p)
             p.start()
 
-        for p in plist:
-            p.join()
 
-        urls.append(q.get())
+        for p in plist:
+            urls.append(q.get())
+            p.join()
 
         for url in urls:
             db.insert_stock_urls(url["symbol"], url["results"])

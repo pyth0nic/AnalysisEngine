@@ -38,7 +38,8 @@ class DBUrls(db):
         self._cur.execute("select distinct public.stocks.symbol, public.stocks.base_url \
         FROM public.stocks left join public.stock_related_urls on \
         public.stock_related_urls.symbol= public.stocks.symbol \
-        where (public.stock_related_urls.last_date::timestamp::date < now()::date - 1) or \
+        where (public.stock_related_urls.last_date::timestamp::date > now()::date - 1 \
+        and public.stock_related_urls.last_date::timestamp::date < now()::date - 1) or \
         public.stock_related_urls.last_date is null limit %d;" % limit)
         rows = self._cur.fetchall()
         if rows:

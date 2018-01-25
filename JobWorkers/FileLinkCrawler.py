@@ -68,6 +68,7 @@ class FileLinkCrawler:
     ### returns list of pdf files
     ###
     def start_spider(self, symbol, base_url):
+
         print(symbol, base_url)
         domain = base_url.replace("http://", "").replace("https://", "").replace("www.", "").replace("/", "")
 
