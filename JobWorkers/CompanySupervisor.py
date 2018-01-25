@@ -22,6 +22,8 @@ class CompanySupervisor:
             plist.append(p)
             p.start()
             urls.append(q.get())
+
+        for p in plist:
             p.join()
 
         for url in urls:
