@@ -46,8 +46,8 @@ class DBUrls(db):
 
     def insert_stock_urls(self, symbol, rows):
         for row in rows:
-            self._cur.execute("INSERT INTO stock_related_urls (symbol, url, referer) VALUES ('%s','%s', '%s')"
-                              % (symbol, row["url"], row["referer"]))
+            self._cur.execute("INSERT INTO stock_related_urls (symbol, url, referer) VALUES (%s,%s,%s)"
+                              , (symbol, row["url"], row["referer"]))
         self._conn.commit()
 
 #if __name__=="__main__":
