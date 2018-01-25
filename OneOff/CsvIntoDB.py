@@ -1,5 +1,5 @@
 import csv
-from Database import DBUrls
+import Data.Database
 
 
 def get_csv_data(filename):
@@ -15,10 +15,10 @@ def get_csv_data(filename):
 stock_data = get_csv_data("../Small_Caps2.csv")
 stock_urls = get_csv_data("../Small_Caps_urls.csv")
 
-db = DBUrls()
+db = Data.Database.DBUrls()
 
-#for row in stock_data:
-#    db.create_stock_entry(description= row[0].rstrip(), symbol=row[1],url="")
+for row in stock_data:
+    db.create_stock_entry(description=row[0].rstrip(), symbol=row[1], url="")
 
 for row in stock_urls:
     print(row)

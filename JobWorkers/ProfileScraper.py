@@ -2,7 +2,7 @@ import requests
 import asyncio
 from bs4 import BeautifulSoup
 import concurrent.futures
-from Database import DBUrls
+from Data.Database import DBUrls
 import json
 urls=[]
 

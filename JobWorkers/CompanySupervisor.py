@@ -1,4 +1,4 @@
-from Database import DBUrls
+from Data.Database import DBUrls
 from JobWorkers.CompanyWorker import CompanyWorker
 from multiprocessing import Manager
 import multiprocessing as mp
