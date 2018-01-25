@@ -18,13 +18,14 @@ class CompanySupervisor:
         print(data)
         for line in data:
             worker = CompanyWorker()
-            p = mp.Process(target=worker.file_crawl, args=(q, line[0], line[2]))
+            p = mp.Process(target=worker.file_crawl, args=(q, line[0], line[1]))
             plist.append(p)
             p.start()
-            urls.append(q.get())
 
         for p in plist:
             p.join()
+
+        urls.append(q.get())
 
         for url in urls:
             db.insert_stock_urls(url["symbol"], url["results"])
